@@ -16,7 +16,10 @@ class TelaSimulado extends StatelessWidget {
               DrawerHeader(
                 decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 243, 160, 37)),
-                child: Text('Sumario', style: GoogleFonts.montserrat()),
+                child: Center(
+                    child: Text('Sumario',
+                        style: GoogleFonts.montserrat(
+                            fontSize: 30, fontWeight: FontWeight.w600))),
               ),
               ListTile(
                 leading: const Icon(Icons.book),
@@ -44,8 +47,15 @@ class TelaSimulado extends StatelessWidget {
         body: Center(
           child: Column(
             children: [
-              DropdownMenuAnoExample(),
-              DropdownMenuExample(),
+              Text('Filtre suas questões para o simulado',
+                  style: GoogleFonts.montserrat(
+                      fontSize: 20, fontWeight: FontWeight.w600)),
+              DropdownMenuAnoExample(
+                onAnoChanged: (String) {},
+              ),
+              DropdownMenuExample(
+                onMateriaChanged: (String) {},
+              ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -70,8 +80,8 @@ class DropdownMenuSimulado extends StatefulWidget {
 }
 
 class _DropdownMenuSimuladoState extends State<DropdownMenuSimulado> {
-  String dropdownValue = 'Matemática';
-  final List<String> list = <String>['Matemática', 'Português'];
+  String dropdownValue = 'matemática';
+  final List<String> materia = <String>['matemática', 'português'];
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +92,7 @@ class _DropdownMenuSimuladoState extends State<DropdownMenuSimulado> {
           dropdownValue = newValue!;
         });
       },
-      items: list.map<DropdownMenuItem<String>>((String value) {
+      items: materia.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
@@ -102,7 +112,7 @@ class DropdownMenuAnoSimulado extends StatefulWidget {
 
 class _DropdownMenuAnoSimuladoState extends State<DropdownMenuAnoSimulado> {
   String dropdownValue = '2015';
-  final List<String> list = <String>[
+  final List<String> ano = <String>[
     '2015',
     '2016',
     '2017',
@@ -123,10 +133,10 @@ class _DropdownMenuAnoSimuladoState extends State<DropdownMenuAnoSimulado> {
           dropdownValue = newValue!;
         });
       },
-      items: list.map<DropdownMenuItem<String>>((String value) {
+      items: ano.map<DropdownMenuItem<String>>((String valueAno) {
         return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
+          value: valueAno,
+          child: Text(valueAno),
         );
       }).toList(),
     );
@@ -151,7 +161,10 @@ class _TelaFazerSimuladoState extends State<TelaFazerSimulado> {
               DrawerHeader(
                 decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 243, 160, 37)),
-                child: Text('Sumario', style: GoogleFonts.montserrat()),
+                child: Center(
+                    child: Text('Sumario',
+                        style: GoogleFonts.montserrat(
+                            fontSize: 30, fontWeight: FontWeight.w600))),
               ),
               ListTile(
                 leading: const Icon(Icons.book),

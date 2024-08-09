@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ifc\Documents\claradsdm\LusoMat\luso_mat\build\windows\CMakeFiles\62cd0f8e6d585324209d2d7f2559269c\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{F22CAE75-C19C-3BF6-88CA-3244445E6C6C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
