@@ -15,7 +15,7 @@ class TelaQuestoes extends StatefulWidget {
 }
 
 class _TelaQuestoesState extends State<TelaQuestoes> {
-  String selectedAno = '2015';
+  String selectedAno = '2018';
   String selectedMateria = 'Matemática';
 
   @override
@@ -145,11 +145,8 @@ class DropdownMenuAnoExample extends StatefulWidget {
 }
 
 class _DropdownMenuAnoExampleState extends State<DropdownMenuAnoExample> {
-  String dropdownValue = '2015';
+  String dropdownValue = '2018';
   final List<String> ano = <String>[
-    '2015',
-    '2016',
-    '2017',
     '2018',
     '2019',
     '2020',
@@ -250,6 +247,7 @@ class _TelaResolverQuestoesState extends State<TelaResolverQuestoes> {
 class Gerais extends StatelessWidget {
   final String? selectedMateria;
   final String? selectedAno;
+  String? _mensagemResultado;
 
   Gerais({this.selectedMateria, this.selectedAno});
 
@@ -275,6 +273,7 @@ class Gerais extends StatelessWidget {
             return ListView.builder(
               itemCount: dados.length,
               itemBuilder: (context, index) {
+                
                 return Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
@@ -302,44 +301,93 @@ class Gerais extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          TextButton(onPressed: () {}, child: Text('A')),
-                          Container(
-                              child: Text(
-                            '${dados[index]['opcaoA']}',
-                            overflow: TextOverflow.visible,
-                          ))
+                          TextButton(
+                              onPressed: () {
+                                _verificarResposta('A',
+                                    '${dados[index]['resposta']}', context);
+                              },
+                              child: Text('A'),
+                              style: TextButton.styleFrom(
+                                  foregroundColor: Colors.blue,
+                                  textStyle: TextStyle(color: Colors.black))),
+                          Flexible(
+                            child: Text(
+                              '${dados[index]['opcaoA']}',
+                              overflow: TextOverflow.visible,
+                            ),
+                          ),
                         ],
                       ),
                       Row(
                         children: [
-                          TextButton(onPressed: () {}, child: Text('B')),
-                          Container(
-                              child: Text(
-                            '${dados[index]['opcaoB']}',
-                            overflow: TextOverflow.visible,
-                          ))
+                          TextButton(
+                              onPressed: () {
+                                _verificarResposta('B',
+                                    '${dados[index]['resposta']}', context);
+                              },
+                              child: Text('B'),
+                              style: TextButton.styleFrom(
+                                  foregroundColor: Colors.blue,
+                                  textStyle: TextStyle(color: Colors.black))),
+                          Flexible(
+                            child: Text(
+                              '${dados[index]['opcaoB']}',
+                              overflow: TextOverflow.visible,
+                            ),
+                          ),
                         ],
                       ),
                       Row(
                         children: [
-                          TextButton(onPressed: () {}, child: Text('C')),
-                          Container(
-                              child: Text(
-                            '${dados[index]['opcaoC']}',
-                            overflow: TextOverflow.visible,
-                          ))
+                          TextButton(
+                              onPressed: () {
+                                _verificarResposta('C',
+                                    '${dados[index]['resposta']}', context);
+                              },
+                              child: Text('C'),
+                              style: TextButton.styleFrom(
+                                  foregroundColor: Colors.blue,
+                                  textStyle: TextStyle(color: Colors.black))),
+                          Flexible(
+                            child: Text(
+                              '${dados[index]['opcaoC']}',
+                              overflow: TextOverflow.visible,
+                            ),
+                          ),
                         ],
                       ),
                       Row(
                         children: [
-                          TextButton(onPressed: () {}, child: Text('D')),
-                          Container(
-                              child: Text(
-                            '${dados[index]['opcaoD']}',
-                            overflow: TextOverflow.visible,
-                          ))
+                          TextButton(
+                            onPressed: () {
+                              _verificarResposta(
+                                  'D', '${dados[index]['resposta']}', context);
+                            },
+                            child: Text('D'),
+                            style: TextButton.styleFrom(
+                                foregroundColor: Colors.blue,
+                                textStyle: TextStyle(color: Colors.black)),
+                          ),
+                          Flexible(
+                            child: Text(
+                              '${dados[index]['opcaoD']}',
+                            ),
+                          ),
                         ],
-                      )
+                      ),
+                      if (_mensagemResultado !=
+                          null) // Verificação para evitar erro
+                        Container(
+                          padding: EdgeInsets.all(16.0),
+                          color: _mensagemResultado == 'Resposta correta!'
+                              ? Colors.green
+                              : Colors.red,
+                          child: Text(
+                            _mensagemResultado!,
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 18.0),
+                          ),
+                        ),
                     ],
                   ),
                 );
@@ -348,5 +396,18 @@ class Gerais extends StatelessWidget {
         }
       },
     );
+  }
+
+  void _verificarResposta(
+      String respostaSelecionada, String resposta, BuildContext context) {
+    if (respostaSelecionada == resposta) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Resposta correta!')),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Resposta incorreta!')),
+      );
+    }
   }
 }
