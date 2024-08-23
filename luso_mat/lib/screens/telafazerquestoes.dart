@@ -6,10 +6,10 @@ import 'package:oficial_lusomat/screens/simulado.dart';
 import 'package:oficial_lusomat/screens/telainicial.dart';
 
 class TelaResolverQuestoes extends StatefulWidget {
-  final String? selectedMateria;
-  final String? selectedAno;
+  final String? selecionarMateria;
+  final String? selecionarAno;
 
-  TelaResolverQuestoes({this.selectedMateria, this.selectedAno});
+  TelaResolverQuestoes({this.selecionarMateria, this.selecionarAno});
 
   @override
   _TelaResolverQuestoesState createState() => _TelaResolverQuestoesState();
@@ -67,18 +67,18 @@ class _TelaResolverQuestoesState extends State<TelaResolverQuestoes> {
         ),
       ),
       body: Gerais(
-        selectedMateria: widget.selectedMateria,
-        selectedAno: widget.selectedAno,
+        selecionarMateria: widget.selecionarMateria,
+        selecionarAno: widget.selecionarAno,
       ),
     );
   }
 }
 
 class Gerais extends StatefulWidget {
-  final String? selectedMateria;
-  final String? selectedAno;
+  final String? selecionarMateria;
+  final String? selecionarAno;
 
-  Gerais({this.selectedMateria, this.selectedAno});
+  Gerais({this.selecionarMateria, this.selecionarAno});
 
   @override
   State<Gerais> createState() => _GeraisState();
@@ -92,7 +92,7 @@ class _GeraisState extends State<Gerais> {
   Widget build(BuildContext context) {
     return FutureBuilder(
       initialData: [],
-      future: findall(materia: widget.selectedMateria, ano: widget.selectedAno),
+      future: findall(materia: widget.selecionarMateria, ano: widget.selecionarAno),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
@@ -137,10 +137,10 @@ class _GeraisState extends State<Gerais> {
                             overflow: TextOverflow.visible,
                             style: GoogleFonts.montserrat()),
                       ),
-                      _buildOptionRow(item, id, 'A'),
-                      _buildOptionRow(item, id, 'B'),
-                      _buildOptionRow(item, id, 'C'),
-                      _buildOptionRow(item, id, 'D'),
+                      _opcoes(item, id, 'A'),
+                      _opcoes(item, id, 'B'),
+                      _opcoes(item, id, 'C'),
+                      _opcoes(item, id, 'D'),
                       if (_respostasSelecionadas.containsKey(id))
                         Center(
                           child: Container(
@@ -166,21 +166,21 @@ class _GeraisState extends State<Gerais> {
     );
   }
 
-  Widget _buildOptionRow(Map item, int id, String option) {
+  Widget _opcoes(Map item, int id, String letra) {
     return Row(
       children: [
         TextButton(
           onPressed: () {
-            _verificarResposta(option, '${item['resposta']}', id);
+            _verificarResposta(letra, '${item['resposta']}', id);
           },
-          child: Text(option),
+          child: Text(letra),
           style: TextButton.styleFrom(
               foregroundColor: Colors.blue,
               textStyle: TextStyle(color: Colors.black)),
         ),
         Flexible(
           child: Text(
-            '${item['opcao$option']}',
+            '${item['opcao$letra']}',
             overflow: TextOverflow.visible,
           ),
         ),

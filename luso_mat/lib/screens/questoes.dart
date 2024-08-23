@@ -16,8 +16,8 @@ class TelaQuestoes extends StatefulWidget {
 }
 
 class _TelaQuestoesState extends State<TelaQuestoes> {
-  String selectedAno = '2018';
-  String selectedMateria = 'Matemática';
+  String selecionarAno = '2018';
+  String selecionarMateria = 'Matemática';
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class _TelaQuestoesState extends State<TelaQuestoes> {
                 DropdownMenuAnoExample(
                   onAnoChanged: (String newValue) {
                     setState(() {
-                      selectedAno = newValue;
+                      selecionarAno = newValue;
                     });
                   },
                 ),
@@ -87,7 +87,7 @@ class _TelaQuestoesState extends State<TelaQuestoes> {
                 DropdownMenuExample(
                   onMateriaChanged: (String newValue) {
                     setState(() {
-                      selectedMateria = newValue;
+                      selecionarMateria = newValue;
                     });
                   },
                 ),
@@ -98,8 +98,8 @@ class _TelaQuestoesState extends State<TelaQuestoes> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => TelaResolverQuestoes(
-                          selectedMateria: selectedMateria,
-                          selectedAno: selectedAno,
+                          selecionarMateria: selecionarMateria,
+                          selecionarAno: selecionarAno,
                         ),
                       ),
                     );

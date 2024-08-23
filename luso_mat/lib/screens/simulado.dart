@@ -14,8 +14,8 @@ class TelaSimulado extends StatefulWidget {
 }
 
 class _TelaSimuladoState extends State<TelaSimulado> {
-  String selectedAno = '2018';
-  String selectedMateria = 'Matemática';
+  String selecionarAno = '2018';
+  String selecionarMateria = 'Matemática';
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,7 @@ class _TelaSimuladoState extends State<TelaSimulado> {
                 DropdownMenuAnoSimulado(
                   onAnoChanged: (String newValue) {
                     setState(() {
-                      selectedAno = newValue;
+                      selecionarAno = newValue;
                     });
                   },
                 ),
@@ -77,7 +77,7 @@ class _TelaSimuladoState extends State<TelaSimulado> {
                 DropdownMenuSimulado(
                   onMateriaChanged: (String newValue) {
                     setState(() {
-                      selectedMateria = newValue;
+                      selecionarMateria = newValue;
                     });
                   },
                 ),
@@ -88,8 +88,8 @@ class _TelaSimuladoState extends State<TelaSimulado> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => TelaFazerSimulado(
-                          selectedMateria: selectedMateria,
-                          selectedAno: selectedAno,
+                          selecionarMateria: selecionarMateria,
+                          selecionarAno: selecionarAno,
                         ),
                       ),
                     );

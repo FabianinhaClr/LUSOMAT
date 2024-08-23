@@ -54,9 +54,6 @@ class MyApp extends StatelessWidget {
 
 //tela inicial parte dois
 class Escolha extends StatelessWidget {
-  static const Duration duration = Duration(seconds: 1);
-  static const Curve curve = Curves.fastOutSlowIn;
-
   @override
   Widget build(BuildContext context) {
     return Center(

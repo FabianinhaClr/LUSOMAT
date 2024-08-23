@@ -9,10 +9,10 @@ import 'package:oficial_lusomat/screens/telainicial.dart';
 import '../database/dao/questaodao.dart';
 
 class TelaFazerSimulado extends StatefulWidget {
-  final String? selectedMateria;
-  final String? selectedAno;
+  final String? selecionarMateria;
+  final String? selecionarAno;
 
-  TelaFazerSimulado({this.selectedMateria, this.selectedAno});
+  TelaFazerSimulado({this.selecionarMateria, this.selecionarAno});
 
   @override
   _TelaFazerSimuladoState createState() => _TelaFazerSimuladoState();
@@ -77,8 +77,8 @@ class _TelaFazerSimuladoState extends State<TelaFazerSimulado> {
         ),
       ),
       body: GeraisSimulado(
-        selectedMateria: widget.selectedMateria,
-        selectedAno: widget.selectedAno,
+        selecionarMateria: widget.selecionarMateria,
+        selecionarAno: widget.selecionarAno,
         onRespostaSelecionada: (id, respostaSelecionada) {
           setState(() {
             respostasSelecionadas[id] = respostaSelecionada;
@@ -105,14 +105,14 @@ class _TelaFazerSimuladoState extends State<TelaFazerSimulado> {
 
 
 class GeraisSimulado extends StatelessWidget {
-  final String? selectedMateria;
-  final String? selectedAno;
+  final String? selecionarMateria;
+  final String? selecionarAno;
   final Map<int, String> respostasSelecionadas;
   final Function(int id, String respostaSelecionada) onRespostaSelecionada;
 
   GeraisSimulado({
-    this.selectedMateria,
-    this.selectedAno,
+    this.selecionarMateria,
+    this.selecionarAno,
     required this.respostasSelecionadas,
     required this.onRespostaSelecionada,
   });
@@ -121,7 +121,7 @@ class GeraisSimulado extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       initialData: [],
-      future: findall(materia: selectedMateria, ano: selectedAno),
+      future: findall(materia: selecionarMateria, ano: selecionarAno),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
