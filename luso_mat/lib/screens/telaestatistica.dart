@@ -14,20 +14,17 @@ class TelaEstatisticas extends StatefulWidget {
 }
 
 class _TelaEstatisticasState extends State<TelaEstatisticas> {
+  //_questoesFuture: Um Future que carrega as questões do banco de dados com base nas respostas fornecidas.
   late Future<Map<int, Map<String, dynamic>>> _questoesFuture;
-  final ScrollController _scrollController = ScrollController();
+
 
   @override
   void initState() {
     super.initState();
     _questoesFuture = _fetchQuestoes();
   }
+//_fetchQuestoes: Método assíncrono que busca as questões do banco de dados para cada ID presente nas respostas selecionadas. Cria um mapa (questoesMap) que associa IDs de questões aos dados das questões.
 
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
 
   Future<Map<int, Map<String, dynamic>>> _fetchQuestoes() async {
     final Map<int, Map<String, dynamic>> questoesMap = {};
@@ -38,6 +35,7 @@ class _TelaEstatisticasState extends State<TelaEstatisticas> {
         questoesMap[id] = questao;
       }
     }
+    //getQuestao: Método auxiliar para buscar uma questão específica do banco de dados com base no ID.
 
     return questoesMap;
   }
@@ -62,6 +60,10 @@ class _TelaEstatisticasState extends State<TelaEstatisticas> {
         future: _questoesFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
+            //ConnectionState.done: Verifica se o Future foi completado e os dados estão disponíveis.
+            //snapshot.hasData: Verifica se os dados foram carregados corretamente.
+            //widget.respostasSelecionadas: Itera sobre as respostas selecionadas para calcular a pontuação e categorizar as questões como corretas ou incorretas.
+
             if (snapshot.hasData) {
               final questoesMap = snapshot.data!;
               int acertos = 0;
@@ -79,24 +81,44 @@ class _TelaEstatisticasState extends State<TelaEstatisticas> {
                   acertos++;
                   questoesCertasWidgets.add(
                     ListTile(
-                      title: Text(
-                        'Questão $id',
-                        style: TextStyle(color: Colors.green),
+                      title: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text(
+                            'Questão $id',
+                            style: GoogleFonts.montserrat(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.green),
+                          ),
+                        ),
                       ),
-                      subtitle: Text(
-                        'Sua resposta: $respostaSelecionada\nResposta correta: $correta',
+                      subtitle: Center(
+                        child: Text(
+                          'Sua resposta: $respostaSelecionada \nResposta correta: $correta',
+                        ),
                       ),
                     ),
                   );
                 } else {
                   questoesErradasWidgets.add(
                     ListTile(
-                      title: Text(
-                        'Questão $id',
-                        style: TextStyle(color: Colors.red),
+                      title: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text(
+                            'Questão $id',
+                            style: GoogleFonts.montserrat(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.red),
+                          ),
+                        ),
                       ),
-                      subtitle: Text(
-                        'Sua resposta: $respostaSelecionada\nResposta correta: $correta',
+                      subtitle: Center(
+                        child: Text(
+                          ' Sua resposta: $respostaSelecionada\nResposta correta: $correta',
+                        ),
                       ),
                     ),
                   );
@@ -107,7 +129,6 @@ class _TelaEstatisticasState extends State<TelaEstatisticas> {
               final porcentagemErros = 100 - porcentagemAcertos;
 
               return ListView(
-                controller: _scrollController,
                 padding: EdgeInsets.all(16.0),
                 children: [
                   Text(
@@ -120,6 +141,8 @@ class _TelaEstatisticasState extends State<TelaEstatisticas> {
                   Container(
                     height: 200,
                     child: PieChart(
+                      //Gráfico de Pizza (PieChart): Mostra a porcentagem de acertos e erros usando o pacote fl_chart. PieChart: Cria um gráfico de pizza que mostra visualmente a porcentagem de acertos e erros. Utiliza o pacote fl_chart para renderizar o gráfico.
+                      // https://pub.dev/packages/pie_chart
                       PieChartData(
                         sections: [
                           PieChartSectionData(
@@ -139,17 +162,42 @@ class _TelaEstatisticasState extends State<TelaEstatisticas> {
                     ),
                   ),
                   SizedBox(height: 16),
-                  Text(
-                    'Questões Corretas',
-                    style: GoogleFonts.montserrat(
-                        fontSize: 20, fontWeight: FontWeight.bold),
+                  Center(
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(100.0),
+                          child: Text(
+                            'Reveja o que você errou!',
+                            style: GoogleFonts.montserrat(
+                                fontSize: 25, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 100),
+                          child: Icon(
+                            Icons.arrow_downward,
+                            size: 30,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Center(
+                    child: Text(
+                      'Questões Corretas',
+                      style: GoogleFonts.montserrat(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                   ),
                   ...questoesCertasWidgets,
                   SizedBox(height: 16),
-                  Text(
-                    'Questões Incorretas',
-                    style: GoogleFonts.montserrat(
-                        fontSize: 20, fontWeight: FontWeight.bold),
+                  Center(
+                    child: Text(
+                      'Questões Incorretas',
+                      style: GoogleFonts.montserrat(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                   ),
                   ...questoesErradasWidgets,
                 ],

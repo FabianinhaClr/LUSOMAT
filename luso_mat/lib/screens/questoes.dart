@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:io';
 import 'package:oficial_lusomat/screens/simulado.dart';
+import 'package:oficial_lusomat/screens/telafazerquestoes.dart';
 import 'package:oficial_lusomat/screens/telainicial.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import '../database/dao/questaodao.dart';
@@ -21,86 +22,101 @@ class _TelaQuestoesState extends State<TelaQuestoes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Questões'),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              decoration:
-                  const BoxDecoration(color: Color.fromARGB(255, 243, 160, 37)),
-              child: Center(
-                  child: Text('Sumario',
+        appBar: AppBar(
+          title: const Text('Questões'),
+        ),
+        //Drawer: Um painel lateral que pode ser deslizado para fora da borda da tela, contendo uma lista de itens de navegação.
+        drawer: Drawer(
+          child: ListView(
+            children: <Widget>[
+              //DrawerHeader: Exibe um cabeçalho no painel lateral Drawer, geralmente usado para mostrar informações de usuário ou título.
+              DrawerHeader(
+                decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 243, 160, 37)),
+                child: Center(
+                    child: Text('Sumario',
+                        //GoogleFonts: Uma classe que facilita o uso das fontes do Google Fonts. Utilizada aqui para aplicar fontes específicas ao texto.
+                        style: GoogleFonts.montserrat(
+                            fontSize: 30, fontWeight: FontWeight.w600))),
+              ),
+              ListTile(
+                leading: const Icon(Icons.book),
+                title: const Text('Tela Inicial'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyApp()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.question_answer),
+                title: const Text('Simulado'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TelaSimulado()),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+        body: Column(children: [
+          Spacer(), // Empurra o conteúdo para baixo
+          Center(
+            // Centraliza horizontalmente
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  child: Text('Filtre suas questões',
                       style: GoogleFonts.montserrat(
-                          fontSize: 30, fontWeight: FontWeight.w600))),
+                          fontSize: 20, fontWeight: FontWeight.w600)),
+                ),
+                SizedBox(height: 20), // Espaçamento entre os elementos
+                DropdownMenuAnoExample(
+                  onAnoChanged: (String newValue) {
+                    setState(() {
+                      selectedAno = newValue;
+                    });
+                  },
+                ),
+                SizedBox(height: 10), // Espaçamento entre os elementos
+                DropdownMenuExample(
+                  onMateriaChanged: (String newValue) {
+                    setState(() {
+                      selectedMateria = newValue;
+                    });
+                  },
+                ),
+                SizedBox(height: 20), // Espaçamento entre os elementos
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TelaResolverQuestoes(
+                          selectedMateria: selectedMateria,
+                          selectedAno: selectedAno,
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text('Vamos lá'),
+                ),
+              ],
             ),
-            ListTile(
-              leading: const Icon(Icons.book),
-              title: const Text('Tela Inicial'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyApp()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.question_answer),
-              title: const Text('Simulado'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TelaSimulado()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text('Filtre suas questões',
-                  style: GoogleFonts.montserrat(
-                      fontSize: 20, fontWeight: FontWeight.w600)),
-            ),
-            DropdownMenuAnoExample(
-              onAnoChanged: (String newValue) {
-                setState(() {
-                  selectedAno = newValue;
-                });
-              },
-            ),
-            DropdownMenuExample(
-              onMateriaChanged: (String newValue) {
-                setState(() {
-                  selectedMateria = newValue;
-                });
-              },
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => TelaResolverQuestoes(
-                      selectedMateria: selectedMateria,
-                      selectedAno: selectedAno,
-                    ),
-                  ),
-                );
-              },
-              child: const Text('Vamos lá'),
-            ),
-          ],
-        ),
-      ),
-    );
+          ),
+          Spacer()
+        ]));
   }
 }
+
+//DropdownButton: Um menu suspenso para seleção de itens de uma lista. Aqui, são usados dois menus suspensos:
+//DropdownMenuExample para selecionar a matéria.
+//DropdownMenuAnoExample para selecionar o ano.
 
 class DropdownMenuExample extends StatefulWidget {
   final Function(String) onMateriaChanged;
@@ -172,242 +188,5 @@ class _DropdownMenuAnoExampleState extends State<DropdownMenuAnoExample> {
         );
       }).toList(),
     );
-  }
-}
-
-class TelaResolverQuestoes extends StatefulWidget {
-  final String? selectedMateria;
-  final String? selectedAno;
-
-  TelaResolverQuestoes({this.selectedMateria, this.selectedAno});
-
-  @override
-  _TelaResolverQuestoesState createState() => _TelaResolverQuestoesState();
-}
-
-class _TelaResolverQuestoesState extends State<TelaResolverQuestoes> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Resolver Questões'),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              decoration:
-                  const BoxDecoration(color: Color.fromARGB(255, 243, 160, 37)),
-              child: Center(
-                  child: Text('Sumario',
-                      style: GoogleFonts.montserrat(
-                          fontSize: 30, fontWeight: FontWeight.w600))),
-            ),
-            ListTile(
-              leading: const Icon(Icons.book),
-              title: const Text('Tela Inicial'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyApp()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.question_answer),
-              title: const Text('Simulado'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TelaSimulado()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.book),
-              title: const Text('Questões'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TelaQuestoes()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-      body: Gerais(
-        selectedMateria: widget.selectedMateria,
-        selectedAno: widget.selectedAno,
-      ),
-    );
-  }
-}
-
-class Gerais extends StatelessWidget {
-  final String? selectedMateria;
-  final String? selectedAno;
-  String? _mensagemResultado;
-
-  Gerais({this.selectedMateria, this.selectedAno});
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      initialData: [],
-      future: findall(materia: selectedMateria, ano: selectedAno),
-      builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-            return const Center(
-                child: Text("Houve um erro de Conexão com o Banco de Dados"));
-
-          case ConnectionState.active:
-          case ConnectionState.waiting:
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          case ConnectionState.done:
-            List<Map> dados = snapshot.data as List<Map>;
-
-            return ListView.builder(
-              itemCount: dados.length,
-              itemBuilder: (context, index) {
-                
-                return Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Divider(
-                        height: 20,
-                        thickness: 5,
-                        indent: 20,
-                        endIndent: 0,
-                        color: Color.fromARGB(255, 255, 255, 255),
-                      ),
-                      Container(
-                        child: Text(
-                          "${dados[index]['materia']}, ${dados[index]['ano']}:",
-                          overflow: TextOverflow.visible,
-                          style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                      Container(
-                        child: Text('${dados[index]['questao']}',
-                            overflow: TextOverflow.visible,
-                            style: GoogleFonts.montserrat()),
-                      ),
-                      Row(
-                        children: [
-                          TextButton(
-                              onPressed: () {
-                                _verificarResposta('A',
-                                    '${dados[index]['resposta']}', context);
-                              },
-                              child: Text('A'),
-                              style: TextButton.styleFrom(
-                                  foregroundColor: Colors.blue,
-                                  textStyle: TextStyle(color: Colors.black))),
-                          Flexible(
-                            child: Text(
-                              '${dados[index]['opcaoA']}',
-                              overflow: TextOverflow.visible,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          TextButton(
-                              onPressed: () {
-                                _verificarResposta('B',
-                                    '${dados[index]['resposta']}', context);
-                              },
-                              child: Text('B'),
-                              style: TextButton.styleFrom(
-                                  foregroundColor: Colors.blue,
-                                  textStyle: TextStyle(color: Colors.black))),
-                          Flexible(
-                            child: Text(
-                              '${dados[index]['opcaoB']}',
-                              overflow: TextOverflow.visible,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          TextButton(
-                              onPressed: () {
-                                _verificarResposta('C',
-                                    '${dados[index]['resposta']}', context);
-                              },
-                              child: Text('C'),
-                              style: TextButton.styleFrom(
-                                  foregroundColor: Colors.blue,
-                                  textStyle: TextStyle(color: Colors.black))),
-                          Flexible(
-                            child: Text(
-                              '${dados[index]['opcaoC']}',
-                              overflow: TextOverflow.visible,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          TextButton(
-                            onPressed: () {
-                              _verificarResposta(
-                                  'D', '${dados[index]['resposta']}', context);
-                            },
-                            child: Text('D'),
-                            style: TextButton.styleFrom(
-                                foregroundColor: Colors.blue,
-                                textStyle: TextStyle(color: Colors.black)),
-                          ),
-                          Flexible(
-                            child: Text(
-                              '${dados[index]['opcaoD']}',
-                            ),
-                          ),
-                        ],
-                      ),
-                      if (_mensagemResultado !=
-                          null) // Verificação para evitar erro
-                        Container(
-                          padding: EdgeInsets.all(16.0),
-                          color: _mensagemResultado == 'Resposta correta!'
-                              ? Colors.green
-                              : Colors.red,
-                          child: Text(
-                            _mensagemResultado!,
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 18.0),
-                          ),
-                        ),
-                    ],
-                  ),
-                );
-              },
-            );
-        }
-      },
-    );
-  }
-
-  void _verificarResposta(
-      String respostaSelecionada, String resposta, BuildContext context) {
-    if (respostaSelecionada == resposta) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Resposta correta!')),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Resposta incorreta!')),
-      );
-    }
   }
 }
