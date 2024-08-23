@@ -92,7 +92,8 @@ class _GeraisState extends State<Gerais> {
   Widget build(BuildContext context) {
     return FutureBuilder(
       initialData: [],
-      future: findall(materia: widget.selecionarMateria, ano: widget.selecionarAno),
+      future:
+          findall(materia: widget.selecionarMateria, ano: widget.selecionarAno),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
@@ -137,6 +138,8 @@ class _GeraisState extends State<Gerais> {
                             overflow: TextOverflow.visible,
                             style: GoogleFonts.montserrat()),
                       ),
+
+                      //lista com as opcoes clicaveis
                       _opcoes(item, id, 'A'),
                       _opcoes(item, id, 'B'),
                       _opcoes(item, id, 'C'),
@@ -144,7 +147,7 @@ class _GeraisState extends State<Gerais> {
                       if (_respostasSelecionadas.containsKey(id))
                         Center(
                           child: Container(
-                            padding: EdgeInsets.all(16.0),
+                            padding: EdgeInsets.all(100.0),
                             color: _mensagensFeedback[id] == 'Resposta correta!'
                                 ? Color.fromARGB(255, 171, 205, 255)
                                 : Color.fromARGB(255, 243, 160, 37),
@@ -178,6 +181,7 @@ class _GeraisState extends State<Gerais> {
               foregroundColor: Colors.blue,
               textStyle: TextStyle(color: Colors.black)),
         ),
+        //esse flexivel aqui é por causa que a tela da problema se nn colocar
         Flexible(
           child: Text(
             '${item['opcao$letra']}',
