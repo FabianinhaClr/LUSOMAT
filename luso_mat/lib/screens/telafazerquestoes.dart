@@ -87,6 +87,8 @@ class Gerais extends StatefulWidget {
 class _GeraisState extends State<Gerais> {
   Map<int, String> _respostasSelecionadas = {};
   Map<int, String> _mensagensFeedback = {};
+  final _key = PageStorageKey('pageStorageKey');
+  final _controller = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +110,8 @@ class _GeraisState extends State<Gerais> {
             List<Map> dados = snapshot.data as List<Map>;
 
             return ListView.builder(
-              // controller: rolagem,
+              key: _key,
+              controller: _controller,
               itemCount: dados.length,
               itemBuilder: (context, index) {
                 var item = dados[index];

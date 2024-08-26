@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oficial_lusomat/screens/questoes.dart';
@@ -103,8 +102,7 @@ class _TelaFazerSimuladoState extends State<TelaFazerSimulado> {
   }
 }
 
-
-class GeraisSimulado extends StatelessWidget {
+class GeraisSimulado extends StatefulWidget {
   final String? selecionarMateria;
   final String? selecionarAno;
   final Map<int, String> respostasSelecionadas;
@@ -118,10 +116,18 @@ class GeraisSimulado extends StatelessWidget {
   });
 
   @override
+  State<GeraisSimulado> createState() => _GeraisSimuladoState();
+}
+
+class _GeraisSimuladoState extends State<GeraisSimulado> {
+  final _key = PageStorageKey('pageStorageKey');
+  final _controller = PageController();
+
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       initialData: [],
-      future: findall(materia: selecionarMateria, ano: selecionarAno),
+      future: findall(materia: widget.selecionarMateria, ano: widget.selecionarAno),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
@@ -140,6 +146,8 @@ class GeraisSimulado extends StatelessWidget {
             List<Map> dados = snapshot.data as List<Map>;
 
             return ListView.builder(
+              key: _key,
+              controller: _controller,
               itemCount: dados.length,
               itemBuilder: (context, index) {
                 final questao = dados[index];
@@ -249,7 +257,7 @@ class GeraisSimulado extends StatelessWidget {
 
   void _verificarRespostaSimulado(int id, String respostaSelecionada,
       String resposta, BuildContext context) {
-    onRespostaSelecionada(id, respostaSelecionada);
+    widget.onRespostaSelecionada(id, respostaSelecionada);
 
     if (respostaSelecionada == resposta) {
       Text('Resposta correta!');
