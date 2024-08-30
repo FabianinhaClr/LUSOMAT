@@ -167,6 +167,18 @@ void insertTodasQuestao() async {
     'opcaoD': 'introduzir um argumento esclarecedor.',
     'resposta': 'D'
   });
+  db.insert('questao', {
+    'id': 123,
+    'questao':
+        'O rap, palavra formada pelas iniciais de rhythm and poetry (ritmo e poesia), junto com as linguagens da dança (o break dancing) e das artes plásticas (o grafite), seria difundido, para além dos guetos, com o nome de cultura hip hop. O break dancing surge como uma dança de rua. O grafite nasce de assinaturas inscritas pelos jovens com sprays nos muros, trens e estações de metrô de Nova York. As linguagens do rap, do break dancing e do grafite se tornaram os pilares da cultura hip hop. Entre as manifestações da cultura hip hop apontadas no texto, o break se caracteriza como um tipo de dança que representa aspectos contemporâneos por meio de movimentos',
+    'materia': 'Português',
+    'ano': 2021,
+    'opcaoA': 'retilíneos, como crítica aos indivíduos alienados.',
+    'opcaoB': 'improvisados, como expressão da dinâmica da vida urbana.',
+    'opcaoC': 'suaves, como sinônimo da rotina dos espaços públicos',
+    'opcaoD': 'ritmados pela sola dos sapatos, como símbolo de protesto.',
+    'resposta': 'B'
+  });
   // 1 PORTUGUES 2022
   db.insert('questao', {
     'id': 22,
@@ -184,6 +196,19 @@ void insertTodasQuestao() async {
         'emprego de metáforas, como em: “a vida engata uma primeira e sai em disparada”.',
     'resposta': 'D'
   });
+  db.insert('questao', {
+    'id': 2387,
+    'questao':
+        'A sessão do Comitê Olímpico Internacional (COI) aprovou uma mudança histórica e inédita no lema olímpico, criado em 1894 pelo Barão Pierre de Coubertin para expressar os valores e a excelência do esporte. Mais de 120 anos depois, o lema tem sua primeira alteração para ressaltar a solidariedade e incluir a palavra “juntos”: mais rápido, mais alto, mais forte — juntos. A mudança foi aprovada por unanimidade pelos membros do COI e celebrada pelo presidente da entidade. De acordo com o texto, a alteração do lema olímpico teve como objetivo a',
+    'materia': 'Português',
+    'ano': 2022,
+    'opcaoA': 'unificação do lema anterior ao atual.',
+    'opcaoB': 'aproximação entre o lema olímpico e o COI.',
+    'opcaoC': 'junção do lema olímpico com os princípios esportivos.',
+    'opcaoD': 'associação entre o lema olímpico e a cooperatividade.',
+    'resposta': 'B'
+  });
+
   // 1 PORTUGUES 2023
   db.insert('questao', {
     'id': 23,
@@ -197,7 +222,22 @@ void insertTodasQuestao() async {
     'opcaoD': 'associação entre o lema olímpico e a cooperatividade.',
     'resposta': 'B'
   });
-
+  db.insert('questao', {
+    'id': 268,
+    'questao':
+        'Se tudo é para ontem, se a vida engata uma primeira e sai em disparada, se não há mais tempo para paradas estratégicas, caímos fatalmente no vício de querer que os amores sejam igualmente resolvidos num átimo de segundo. Temos pressa para ouvir “eu te amo”. Não vemos a hora de que fiquem estabelecidas as regras de convívio: somos namorados, ficantes, casados, amantes? Urgência emocional. Uma cilada. Associamos diversas palavras ao AMOR: paixão, romance, sexo, adrenalina, palpitação. Esquecemos, no entanto, da palavra que viabiliza esse sentimento: “paciência”. Amor sem paciência não vinga. Amor não pode ser mastigado e engolido com emergência, com fome desesperada. É uma refeição que pode durar uma vida. Nesse texto de opinião, as marcas linguísticas revelam uma situação distensa e de pouca formalidade, o que se evidencia pelo(a)',
+    'materia': 'Português',
+    'ano': 2023,
+    'opcaoA':
+        'impessoalização ao longo do texto, como em: “se não há mais tempo”.',
+    'opcaoB':
+        'construção de uma atmosfera de urgência, em palavras como: “pressa”.',
+    'opcaoC':
+        'repetição de uma determinada estrutura sintática, como em: “Se tudo é para ontem”.',
+    'opcaoD':
+        'emprego de metáforas, como em: “a vida engata uma primeira e sai em disparada”.',
+    'resposta': 'D'
+  });
 // MATEMÁTICA 2022
   db.insert('questao', {
     'id': 11,
@@ -210,6 +250,18 @@ void insertTodasQuestao() async {
     'opcaoD': '24',
     'materia': 'Matemática',
     'resposta': 'D'
+  });
+  db.insert('questao', {
+    'id': 11111,
+    'questao':
+        'A caixa-d’água de um edifício terá a forma de um paralelepípedo retângulo reto com volume igual a 28 080 litros. Em uma maquete que representa o edifício, a caixa-d’água tem dimensões 2 cm × 3,51 cm × 4 cm. Dado: 1 dm³ = 1 L. A escala usada pelo arquiteto foi de',
+    'ano': 2022,
+    'opcaoA': '1 : 10',
+    'opcaoB': '1 : 100',
+    'opcaoC': '1 : 1 000',
+    'opcaoD': '1 : 10 000',
+    'materia': 'Matemática',
+    'resposta': 'B'
   });
 
   // MATEMÁTICA 2020
@@ -292,6 +344,18 @@ void insertTodasQuestao() async {
     'materia': 'Matemática',
     'resposta': 'A'
   });
+  db.insert('questao', {
+    'id': 1799,
+    'questao':
+        'Uma empresa especializada em conservação de piscinas utiliza um produto para tratamento da água cujas especificações técnicas sugerem que seja adicionado 1,5 mL desse produto para cada 1 000 L de água da piscina. Essa empresa foi contratada para cuidar de uma piscina de base retangular, de profundidade constante igual a 1,7 m, com largura e comprimento iguais a 3 m e 5 m, respectivamente. O nível da lâmina d’água dessa piscina é mantido a 50 cm da borda da piscina. A quantidade desse produto, em mililitro, que deve ser adicionada a essa piscina de modo a atender às suas especificações técnicas é',
+    'ano': 2019,
+    'opcaoA': '11,25.',
+    'opcaoB': '27,00.',
+    'opcaoC': '28,80.',
+    'opcaoD': '32,25.',
+    'materia': 'Matemática',
+    'resposta': 'B'
+  });
 
   // MATEMÁTICA 2021
   db.insert('questao', {
@@ -306,6 +370,18 @@ void insertTodasQuestao() async {
     'materia': 'Matemática',
     'resposta': 'D'
   });
+  db.insert('questao', {
+    'id': 17455,
+    'questao':
+        'Uma empresa especializada em conservação de piscinas utiliza um produto para tratamento da água cujas especificações técnicas sugerem que seja adicionado 1,5 mL desse produto para cada 1 000 L de água da piscina. Essa empresa foi contratada para cuidar de uma piscina de base retangular, de profundidade constante igual a 1,7 m, com largura e comprimento iguais a 3 m e 5 m, respectivamente. O nível da lâmina d’água dessa piscina é mantido a 50 cm da borda da piscina. A quantidade desse produto, em mililitro, que deve ser adicionada a essa piscina de modo a atender às suas especificações técnicas é',
+    'ano': 2021,
+    'opcaoA': '11,25.',
+    'opcaoB': '27,00.',
+    'opcaoC': '28,80.',
+    'opcaoD': '32,25.',
+    'materia': 'Matemática',
+    'resposta': 'B'
+  });
 
   // MATEMÁTICA 2023
   db.insert('questao', {
@@ -317,6 +393,18 @@ void insertTodasQuestao() async {
     'opcaoB': '13 500 000,00',
     'opcaoC': '135 000 000,00',
     'opcaoD': '1 350 000 000,00',
+    'materia': 'Matemática',
+    'resposta': 'D'
+  });
+  db.insert('questao', {
+    'id': 191919,
+    'questao':
+        'Sob a orientação de um mestre de obras, João e Pedro trabalharam na reforma de um edifício. João efetuou reparos na parte hidráulica nos andares 1, 3, 5, 7, e assim sucessivamente, de dois em dois andares. Pedro trabalhou na parte elétrica nos andares 1, 4, 7, 10, e assim sucessivamente, de três em três andares. Coincidentemente, terminaram seus trabalhos no último andar. Na conclusão da reforma, o mestre de obras informou, em seu relatório, o número de andares do edifício. Sabe-se que, ao longo da execução da obra, em exatamente 20 andares, foram realizados reparos nas partes hidráulica e elétrica por João e Pedro. Qual é o número de andares desse edifício?',
+    'ano': 2023,
+    'opcaoA': '40',
+    'opcaoB': '60',
+    'opcaoC': '100',
+    'opcaoD': '115',
     'materia': 'Matemática',
     'resposta': 'D'
   });

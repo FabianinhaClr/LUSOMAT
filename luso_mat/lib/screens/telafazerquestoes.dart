@@ -150,10 +150,10 @@ class _GeraisState extends State<Gerais> {
                       if (_respostasSelecionadas.containsKey(id))
                         Center(
                           child: Container(
-                            padding: EdgeInsets.all(100.0),
-                            color: _mensagensFeedback[id] == 'Resposta correta!'
+                            padding: EdgeInsets.all(50.0),
+                            decoration: BoxDecoration(border: Border.all(color: _mensagensFeedback[id] == 'Resposta correta!'
                                 ? Color.fromARGB(255, 171, 205, 255)
-                                : Color.fromARGB(255, 243, 160, 37),
+                                : Color.fromARGB(255, 243, 160, 37))),                            
                             child: Text(
                               _mensagensFeedback[id]!,
                               style: TextStyle(
@@ -180,10 +180,8 @@ class _GeraisState extends State<Gerais> {
             _verificarResposta(letra, '${item['resposta']}', id);
           },
           child: Text(letra),
-          style: TextButton.styleFrom(
-              foregroundColor: Colors.blue,
-              textStyle: TextStyle(color: Colors.black)),
         ),
+
         //esse flexivel aqui é por causa que a tela da problema se nn colocar
         Flexible(
           child: Text(
